@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do 
       resources :stock_symbols, only: [:index, :show]
       get 'search/:search_term', to: 'stock_symbols#search'
+      get 'quote/:id', to: 'stock_symbols#quote'
     end
   end
 end

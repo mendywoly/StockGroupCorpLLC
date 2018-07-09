@@ -15,4 +15,10 @@ class Api::V1::StockSymbolsController < ApplicationController
     render json: stock_charts
   end
 
+  def quote
+    # byebug
+    stock_charts = StockSymbol.fetch_data_api(params[:id] ,'quote')
+    render json: stock_charts
+  end
+
 end
