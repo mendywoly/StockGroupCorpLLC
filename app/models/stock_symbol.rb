@@ -12,7 +12,7 @@ class StockSymbol < ApplicationRecord
     end
 
     def self.search(search)
-        where("name ILIKE ? OR stock_symbol ILIKE ?", "%#{search}%", "%#{search}%") 
+        where("name ILIKE ? OR stock_symbol ILIKE ?", "%#{search}%", "%#{search}%").limit(20) 
     end
 
     def self.fetch_data_api(symbol, api_endpoint)
