@@ -8,4 +8,8 @@ Rails.application.routes.draw do
       get 'quote/:id', to: 'stock_symbols#quote'
     end
   end
+
+  resources :sessions, only: [:create]
+  resources :users, only: [:index, :show, :create]
+
 end
