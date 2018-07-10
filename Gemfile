@@ -48,3 +48,4 @@ gem 'rest-client'
 gem 'json'
 gem 'pry'
 gem 'jwt'
+gem 'dotenv-rails', groups: [:development, :test]
