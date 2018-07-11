@@ -1,5 +1,9 @@
 
 class StockSymbol < ApplicationRecord
+    has_many :favorites
+    has_many :users, through: :favorites
+
+
 
     API_URL = 'https://api.iextrading.com/1.0/'
     def self.get_symbol

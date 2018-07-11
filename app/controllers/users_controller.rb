@@ -4,14 +4,15 @@ class UsersController < ApplicationController
         if(requires_login)
             @user = User.find(params[:id])
             payload = decode_token
-            h = User.find_by(name: payload[0]['name'])
-                if h.id === @user.id
-                render json: @user 
+
+            currentUser = User.find_by(id: payload[0]['id'])
+                if currentUser.id === @user.id
+                    render json: {user: @user, pay:payload}
                 else
-                    render json: {message: "No!"}
+                    render json: payload
                 end
         else
-            render json: {message: "No!"}
+            render json: {message: "No!", p: payload}
         end
     end
 
