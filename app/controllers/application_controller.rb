@@ -36,4 +36,11 @@ class ApplicationController < ActionController::API
             true
         end
     end
+
+    def authorized?(id)
+        payload = decode_token
+        # byebug
+        return payload[0]['id'] == id.to_i 
+    end
+
 end

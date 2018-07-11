@@ -12,7 +12,7 @@ class StockSymbol < ApplicationRecord
         data.each do |sym|
             StockSymbol.find_or_create_by(stock_symbol: sym['symbol'], name:sym['name'], symbol_type: sym['type'], iexId: sym['iexId'])
         end
-        binding.pry
+        # binding.pry
     end
 
     def self.search(search)

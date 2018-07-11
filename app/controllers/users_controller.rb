@@ -1,18 +1,11 @@
 class UsersController < ApplicationController
     
     def show
-        if(requires_login)
+        if(requires_login && authorized?(params[:id]))
             @user = User.find(params[:id])
-            payload = decode_token
-
-            currentUser = User.find_by(id: payload[0]['id'])
-                if currentUser.id === @user.id
-                    render json: {user: @user, pay:payload}
-                else
-                    render json: payload
-                end
+            render json: {user: @user.stock_symbols}
         else
-            render json: {message: "No!", p: payload}
+            render json: {message: "No!"}
         end
     end
 
@@ -26,8 +19,24 @@ class UsersController < ApplicationController
             }
         else
             render json: user.errors
-        end
-                
+        end    
     end
+
+    def update
+        # byebug
+        if(requires_login && authorized?(params[:id]))
+            user = User.find(params[:id])
+            stock = StockSymbol.find_by(stock_symbol: params[:symbolId])
+            user.stock_symbols << stock
+            render json: stock
+        else
+            render json: {Err: "user.errors"}
+        end
+
+
+
+    end
+
+    
 
 end
