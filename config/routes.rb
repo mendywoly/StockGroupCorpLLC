@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :sessions, only: [:create]
-  resources :users, only: [:index, :show, :create, :update]
+  resources :users, only: [:index, :show, :create, :update, :delete]
+
 
 end
