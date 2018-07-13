@@ -10,9 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2018_07_11_172609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "stock_symbol_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_symbol_id"], name: "index_favorites_on_stock_symbol_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "stock_symbols", force: :cascade do |t|
+    t.string "stock_symbol"
+    t.string "name"
+    t.string "symbol_type"
+    t.string "iexId"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "favorites", "stock_symbols"
+  add_foreign_key "favorites", "users"
 end
